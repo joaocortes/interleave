@@ -685,7 +685,10 @@ Keybindings (org-mode buffer):
   (if interleave-mode
       (condition-case nil
           (progn
-            (setq interleave-org-buffer (make-indirect-buffer (buffer-name)))
+            (setq interleave-org-buffer (make-indirect-buffer
+					 (buffer-name)
+					 (generate-new-buffer-name
+					  (concat (buffer-name) "-Interleave"))))
             (setq interleave--window-configuration (current-window-configuration))
             (interleave--open-file (interleave--select-split-function))
             ;; expand/show all headlines if narrowing is disabled
