@@ -584,6 +584,7 @@ of .pdf)."
       (interleave--sort-notes interleave-sort-order)
       (org-overview))
     (interleave-mode 0))
+(kill-buffer interleave-org-buffer)
   (interleave-pdf-kill-proc-and-buffer))
 
 (defun interleave--headlines-available-p ()
@@ -684,7 +685,7 @@ Keybindings (org-mode buffer):
   (if interleave-mode
       (condition-case nil
           (progn
-            (setq interleave-org-buffer (buffer-name))
+            (setq interleave-org-buffer (make-indirect-buffer (buffer-name)))
             (setq interleave--window-configuration (current-window-configuration))
             (interleave--open-file (interleave--select-split-function))
             ;; expand/show all headlines if narrowing is disabled
